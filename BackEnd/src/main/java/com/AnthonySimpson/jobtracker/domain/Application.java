@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Application {
     
+    // All the data required to make an Application
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
