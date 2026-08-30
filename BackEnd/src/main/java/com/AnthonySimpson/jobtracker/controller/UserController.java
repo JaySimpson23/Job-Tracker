@@ -11,6 +11,8 @@ import com.AnthonySimpson.jobtracker.domain.User;
 import com.AnthonySimpson.jobtracker.dto.UserResponse;
 import com.AnthonySimpson.jobtracker.service.UserService;
 
+import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,7 +24,7 @@ public class UserController {
 
     // Registering an account
     @PostMapping("/register")
-    public UserResponse register(@RequestBody User user) {
+    public UserResponse register(@Valid @RequestBody User user) {
         User savedUser = userService.register(user);
         return UserResponse.fromUser(savedUser);
     }

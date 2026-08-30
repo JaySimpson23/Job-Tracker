@@ -1,8 +1,28 @@
 import {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 function Login() {
     const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
+
+    /* The logic handling the login process for the user which is connecting to
+    the backend Login api. */   
+    const handleLogin = async () => {
+        const response = await fetch('http://localhost:8080/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:  JSON.stringify({identifier, password}),
+        })
+
+        // Saving the token to local storage.
+        const token = await response.text()
+        localStorage.setItem('token', token)
+        navigate('/dashboard')
+
+    }
+
 
     return (
         <div>
@@ -20,7 +40,9 @@ function Login() {
             onChange = {(e) => setPassword(e.currentTarget.value)}
             />
 
-            <button onClick = {() => console.log(identifier, password)}>
+            <Link to = "/register"> Don't have an account? Register here </Link>
+
+            <button onClick = {handleLogin}>
                 Login
             </button>
         </div>

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+import jakarta.validation.Valid;
+
 import com.AnthonySimpson.jobtracker.service.ApplicationService;
 import com.AnthonySimpson.jobtracker.domain.User;
 import com.AnthonySimpson.jobtracker.domain.Application;
@@ -28,7 +30,7 @@ public class ApplicationController {
 
    // Creating the application
    @PostMapping
-   public ApplicationResponse create(@RequestBody Application application, Authentication authentication) {
+   public ApplicationResponse create( @Valid @RequestBody Application application, Authentication authentication) {
     User user = (User) authentication.getPrincipal();
     Application saved = applicationService.create(application, user);
     return ApplicationResponse.fromApplication(saved);
@@ -51,7 +53,7 @@ public class ApplicationController {
 
     // Updating the application
     @PutMapping("/{id}")
-    public ApplicationResponse update(@PathVariable Long id, @RequestBody Application application, Authentication authentication) {
+    public ApplicationResponse update(@PathVariable Long id, @Valid @RequestBody Application application, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return ApplicationResponse.fromApplication(applicationService.update(id, application, user));
     }

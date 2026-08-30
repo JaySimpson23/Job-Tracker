@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +24,13 @@ public class User {
     @Id
     Long id;
     @Column(unique = true)
+    @NotBlank
     String username;
+    @NotBlank
+    @Size(min = 6)
     String password;
+    @NotBlank
+    @Email
     @Column(unique = true)
     String email;
     LocalDateTime createdAt;
