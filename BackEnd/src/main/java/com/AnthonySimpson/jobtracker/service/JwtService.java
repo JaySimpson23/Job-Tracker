@@ -1,17 +1,16 @@
 package com.AnthonySimpson.jobtracker.service;
 
-import org.springframework.stereotype.Service;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.Claims;
-
-import javax.crypto.SecretKey;
-
 import java.security.Key;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
@@ -28,7 +27,7 @@ public class JwtService {
         return Jwts.builder()
         .subject(email)
         .issuedAt(new Date())
-        .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) /* 1 hour */
+        .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) /* 24 hour */
         .signWith(getSigningKey()).compact();
     }
     // writing helper method so the JJWT can convert the String secret in to a cryptographic Key. 

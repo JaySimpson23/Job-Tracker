@@ -15,6 +15,7 @@ public class UserResponse {
     String username;
     String email;
     LocalDateTime createdAt;
+    int applicationCount;
 
     public static UserResponse fromUser(User user) {
         UserResponse response = new UserResponse();
@@ -23,6 +24,7 @@ public class UserResponse {
         response.username = user.getUsername();
         response.email = user.getEmail();
         response.createdAt = user.getCreatedAt();
+        response.applicationCount = user.getApplicationCount();
 
         return response;
     }

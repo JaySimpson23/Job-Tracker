@@ -1,13 +1,14 @@
 package com.AnthonySimpson.jobtracker.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.AnthonySimpson.jobtracker.domain.Application;
 import com.AnthonySimpson.jobtracker.domain.User;
 import com.AnthonySimpson.jobtracker.repository.ApplicationRepository;
-
-import java.util.List;
-import java.util.Optional;
+import com.AnthonySimpson.jobtracker.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,11 +17,14 @@ import lombok.RequiredArgsConstructor;
 public class ApplicationService {
 
      private final ApplicationRepository applicationRepository;
+     private final UserRepository userRepository;
 
 
      // creates an application for the current user and sets the user to that application.
     public Application create(Application application, User currentUser) {
         application.setUser(currentUser);
+        currentUser.setApplicationCount(currentUser.getApplicationCount() + 1);
+        userRepository.save(currentUser);
         return applicationRepository.save(application);
     
     }

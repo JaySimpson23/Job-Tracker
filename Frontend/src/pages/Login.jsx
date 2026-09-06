@@ -1,11 +1,13 @@
 import {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import '../App.css'
 
 
 function Login() {
     const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const [ error, setError] = useState('')
 
     /* The logic handling the login process for the user which is connecting to
     the backend Login api. */   
@@ -16,6 +18,12 @@ function Login() {
             body:  JSON.stringify({identifier, password}),
         })
 
+        // return a error for invalid credentials promt to try again
+        if(!response.ok) {
+            setError('Invalid credentials. Please try again.')
+            return
+        }
+
         // Saving the token to local storage.
         const token = await response.text()
         localStorage.setItem('token', token)
@@ -25,26 +33,31 @@ function Login() {
 
 
     return (
-        <div>
+        <div className = "auth-container">  
             <h1>Login</h1>
 
-            <input 
-            type = "text"
-            value = {identifier}
-            onChange = {(e) => setIdentifier(e.target.value)}
-            />
+            <div className = "auth-card">
+                 <input 
+                    type = "text"
+                    value = {identifier}
+                    placeholder = "Email or Username"
+                    onChange = {(e) => setIdentifier(e.target.value)}
+                />
 
-            <input 
-            type = "password"
-            value = {password}
-            onChange = {(e) => setPassword(e.currentTarget.value)}
-            />
+                <input 
+                    type = "password"
+                    value = {password}
+                    placeholder = "Password"
+                    onChange = {(e) => setPassword(e.currentTarget.value)}
+                />
 
             <Link to = "/register"> Don't have an account? Register here </Link>
 
-            <button onClick = {handleLogin}>
-                Login
-            </button>
+            {error && <p className = "error-message">{error}</p>}
+                <button onClick = {handleLogin}>
+                    Login
+                </button>
+            </div>
         </div>
     )
 }
