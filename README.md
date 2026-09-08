@@ -8,6 +8,7 @@ A fullstack application built with Spring Boot/PostgreSQL backend and with a Rea
 - Spring Security / JWT
 - PostgreSQL
 - Maven
+- Docker
 
 ## Tech Stack (Frontend)
 - React JS
@@ -20,6 +21,7 @@ A fullstack application built with Spring Boot/PostgreSQL backend and with a Rea
 ### Prerequisites (Backend)
 - Java 21
 - PostgreSQL running locally
+- Docker for containerization
 
 ### Prerequisites (Frontend)
 - React 
@@ -38,6 +40,12 @@ A fullstack application built with Spring Boot/PostgreSQL backend and with a Rea
 2. Run npm install for dependencies
 3. npm run dev
 
+### Installation (Docker - Recommended)
+1. Clone the repo
+2. Copy .env.example to .env
+3. Fill in with the correct credentials
+4. Run docker compose up --build
+
 ## Features
 - User registration and login with JWT authentication
 - Create, read, update, and delete job applications
@@ -49,12 +57,12 @@ A fullstack application built with Spring Boot/PostgreSQL backend and with a Rea
 ## API Endpoints
 
 ### Auth
-- POST   /auth/register   Register a new user
-- POST   /auth/login      Login and receive JWT token
+- POST   /api/users/register   Register a new user
+- POST   /api/auth/login      Login and receive JWT token
 
 ### Job Applications
-- GET    /jobs         Get all applications for logged in user
-- GET    /jobs/{id}    Get one application
-- POST   /jobs         Create a new application
-- PUT    /jobs/{id}    Update an application
-- DELETE /jobs/{id}    Delete an application
+- GET    /api/applications        Get all applications for logged in user
+- GET    /api/applications/{id}    Get one application
+- POST   /api/applications         Create a new application
+- PUT    /api/applications/{id}    Update an application
+- DELETE /api/applications/{id}    Delete an application
