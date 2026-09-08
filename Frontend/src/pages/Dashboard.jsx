@@ -8,7 +8,7 @@ function Dashboard() {
     const [applications, setApplications] = useState([])
     const [editingId, setEditingId] = useState(null)
     const [editForm, setEditForm] = useState({companyName: '', position: '', status: ''})
-    const [loading, setLoading] =useState(true)
+    const [loading, setLoading] = useState(true)
     const [applicationCount, setApplicationCount] = useState(0)
 
     /* Getting the user that was stored to localstorage and navigating to their 
